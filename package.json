@@ -1,5 +1,5 @@
 {
-  "name": "egg-helper",
+  "name": "@ehitco/egg-helper",
   "version": "1.0.0",
   "description": "eggjs plugin helper, methods, utils",
   "eggPlugin": {
