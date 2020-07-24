@@ -1,0 +1,4 @@
+2020-07-24 22:05:25,041 INFO 2303 [egg:logger] init all loggers with options: {"dir":"/Users/lihaiming/ehitco/egg-helper/logs/egg-helper","encoding":"utf8","env":"unittest","level":"INFO","consoleLevel":"WARN","disableConsoleAfterReady":false,"outputJSON":false,"buffer":false,"appLogName":"egg-helper-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{},"allowDebugAtProd":false,"type":"agent"}
+2020-07-24 22:05:25,045 INFO 2303 [egg:core] dump config after load, 2ms
+2020-07-24 22:05:25,065 INFO 2303 [egg-watcher:agent] watcher start success
+2020-07-24 22:05:25,071 INFO 2303 [egg:core] dump config after ready, 5ms

@@ -1,9 +1,11 @@
+/* eslint-disable jsdoc/require-param */
 /*
  * @Author: Aiden.lee
  * @Date: 2020-07-23 17:52:00
- * @LastEditTime: 2020-07-23 17:53:52
- * @Description: 
- */ 
+ * @LastEditTime: 2020-07-24 21:22:55
+ * @Description:
+ */
+'use strict';
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -26,7 +28,7 @@ const {
   isError,
   isFunction,
   isPrimitive,
-  isBuffer
+  isBuffer,
 } = require('core-util-is');
 
 const fsRmdir = promisify(fs.rmdir, fs);
@@ -57,9 +59,7 @@ exports.isFunction = isFunction;
 exports.isPrimitive = isPrimitive;
 exports.isBuffer = isBuffer;
 
-/**
- * override isObject method in `core-util-is` module
- */
+
 exports.isObject = obj => {
   return toString.call(obj) === '[object Object]';
 };
@@ -71,7 +71,8 @@ function isInt(value) {
   if (isNaN(value) || exports.isString(value)) {
     return false;
   }
-  var x = parseFloat(value);
+  const x = parseFloat(value);
+  // eslint-disable-next-line no-bitwise
   return (x | 0) === x;
 }
 
@@ -86,9 +87,9 @@ exports.isInt = isInt;
 function promisify(fn, receiver) {
   return (...args) => {
     return new Promise((resolve, reject) => {
-      fn.apply(receiver, [...args, (err, res) => {
+      fn.apply(receiver, [ ...args, (err, res) => {
         return err ? reject(err) : resolve(res);
-      }]);
+      } ]);
     });
   };
 }
@@ -158,7 +159,7 @@ function snakeCase(str) {
   return str.replace(/([^A-Z])([A-Z])/g, function($0, $1, $2) {
     return $1 + '_' + $2.toLowerCase();
   });
-};
+}
 exports.snakeCase = snakeCase;
 
 /**
@@ -245,7 +246,7 @@ exports.md5 = md5;
  * @return {[type]}      []
  */
 function timeout(time = 1000) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(resolve, time);
   });
 }
@@ -256,6 +257,7 @@ exports.timeout = timeout;
  */
 function escapeHtml(str) {
   return (str + '').replace(/[<>'"]/g, a => {
+    // eslint-disable-next-line default-case
     switch (a) {
       case '<':
         return '&lt;';
@@ -298,7 +300,7 @@ function datetime(date = new Date(), format) {
     DD: fn(d.getDate()),
     HH: fn(d.getHours()),
     mm: fn(d.getMinutes()),
-    ss: fn(d.getSeconds())
+    ss: fn(d.getSeconds()),
   };
 
   return format.replace(/([a-z])\1+/ig, a => {
@@ -328,25 +330,25 @@ exports.parseAdapterConfig = (config = {}, ...extConfig) => {
   if (config.handle) {
     const type = config.type;
     delete config.type;
-    config = {type, [type]: config};
+    config = { type, [type]: config };
   }
   extConfig = extConfig.map(item => {
     if (!item) return {};
     // only change type
     // 'xxx'
     if (exports.isString(item)) {
-      item = {type: item};
+      item = { type: item };
     }
     // {handle: 'www'}
     // only add some configs
     if (!item.type) {
-      item = {type: config.type, [config.type]: item};
+      item = { type: config.type, [config.type]: item };
     }
     // {type: 'xxx', handle: 'www'}
     if (item.handle) {
       const type = item.type;
       delete item.type;
-      item = {type, [type]: item};
+      item = { type, [type]: item };
     }
     return item;
   });
@@ -471,7 +473,6 @@ exports.mkdir = mkdir;
  * get files in path
  * @param  {} dir    []
  * @param  {} prefix []
- * @return {}        []
  */
 function getdirFiles(dir, prefix = '') {
   dir = path.normalize(dir);
@@ -489,7 +490,7 @@ function getdirFiles(dir, prefix = '') {
     }
   });
   return result;
-};
+}
 
 exports.getdirFiles = getdirFiles;
 

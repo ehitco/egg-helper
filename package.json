@@ -41,9 +41,8 @@
     "autod": "autod"
   },
   "files": [
-    "app.js",
-    "config",
-    "app"
+    "app",
+    "config"
   ],
   "ci": {
     "version": "8, 10"
